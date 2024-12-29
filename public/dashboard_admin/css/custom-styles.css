@@ -1,0 +1,41 @@
+
+
+div .img-pp-dashboard{
+    width: 50px !important;
+    height: 50px !important;
+    border-radius: 50% !important;
+    background-color: aqua;
+}
+
+tr td{
+    max-width: 150px !important; 
+    white-space: nowrap !important; 
+    overflow: hidden !important; 
+    text-overflow: ellipsis !important;
+}
+
+.active{
+    background-color: rgb(255, 255, 255);
+    padding-left: 35px;
+}
+.nav-link.active{
+    color: #863427 !important;
+}
+.nav-link.active .sb-nav-link-icon{
+    color: #863427 !important;
+}
+
+
+.sb-sidenav{
+    background-color: #863427 !important;
+}
+.nav-link, .sb-nav-link-icon{
+    color: white !important;
+}
+.sb-nav-link-icon{
+    color: #ffffff !important;
+}
+
+.container{
+    
+}
