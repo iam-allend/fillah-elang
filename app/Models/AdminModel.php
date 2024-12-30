@@ -11,7 +11,7 @@ class AdminModel extends Model
     protected $table = 'users'; // Nama tabel yang digunakan
     protected $primaryKey = 'id'; // Primary key tabel
     protected $allowedFields  = [
-    'email', 'username', 'password', 'pass_confirm', 'phone_number', 'address', 'img_user' // Add any other fields
+    'email', 'username', 'password', 'pass_confirm', 'phone_number', 'level_user_id', 'address', 'img_user' // Add any other fields
     ];
 
     protected $useTimestamps = true; 
@@ -26,5 +26,10 @@ class AdminModel extends Model
     public function getAdmin(): array
     {   
         return $this->where('level_user_id', 1)->findAll();
+    }
+
+    public function getAllRole(): array
+    {   
+        return $this->findAll();
     }
 }

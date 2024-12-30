@@ -19,8 +19,9 @@ class DashboardAdminController extends BaseController
 
         // $data['users'] = $this -> adminModel->findAll(); // Mengambil semua data user dari database 
         $adminModel = new AdminModel();
-        $data['users'] = $adminModel->getRole(); // Mengambil semua data user dari database
+        $data['users'] = $adminModel->getAllRole(); // Mengambil semua data user dari database
         
+
         return view('dashboard_admin/index', $data); // Mengirim data ke view 'index'
     }
 
@@ -34,6 +35,7 @@ class DashboardAdminController extends BaseController
             'email' => $this->request->getPost('F_email'),
             'phone_number' => $this->request->getPost('F_phone_number'),
             'address' => $this->request->getPost('F_address'),
+            'level_user_id' => $this->request->getPost('F_role'),
             'password' => password_hash($this->request->getPost('F_password'), PASSWORD_DEFAULT) // Hash password
         ];
 

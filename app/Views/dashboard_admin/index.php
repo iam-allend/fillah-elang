@@ -6,8 +6,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Static Navigation - SB Admin</title>
+        <title>Admin Panel</title>
 
+    <link rel="icon" type="image/x-icon" href="<?= base_url('frontend/images/logo-circle-bgwhite.png') ?>">
 
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
         <link href="<?= base_url()?>dashboard_admin/css/styles.css" rel="stylesheet" />
@@ -57,23 +58,11 @@
 
                     <div class="sb-sidenav-menu">
                         <div class="nav">
-                            <div class="sb-sidenav-menu-heading">PERFORMANCE</div>
-                            <a class="nav-link disabled" href="<?= base_url()?>admin">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                Dashboard
-                            </a>
-                            <a class="nav-link disabled" href="<?= base_url()?>admin">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                Disabled
-                            </a>
+                            
                             <div class="sb-sidenav-menu-heading">ACTIVITY</div>
                             <a class="nav-link" href="<?= base_url()?>admin/transactions">
                                 <div class="sb-nav-link-icon"><i class="fa-solid fa-money-bill-transfer"></i></div>
                                 Transaction
-                            </a>
-                            <a class="nav-link disabled" href="<?= base_url()?>admin/transactions">
-                                <div class="sb-nav-link-icon"><i class="fa-solid fa-money-bill-transfer"></i></div>
-                                Disabled
                             </a>
                             <div class="sb-sidenav-menu-heading">MASTER DATA</div>
                             <a class="nav-link active" href="<?= base_url()?>admin/users">
@@ -84,12 +73,6 @@
                                 <div class="sb-nav-link-icon"><i class="fa-solid fa-boxes-stacked"></i></div>
                                 Product
                             </a>
-                            <!-- <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="/admin/layout-static">Static Navigation</a>
-                                    <a class="nav-link" href="layout-sidenav-light.html">Light Sidenav</a>
-                                </nav>
-                            </div> -->
                             
                         </div>
                     </div>
@@ -118,7 +101,8 @@
                                             <th>Username</th>
                                             <th>Email</th>
                                             <th>No Telp</th>
-                                            <th>Alamat</th>                                            
+                                            <th>Alamat</th> 
+                                            <th>Role</th>                                           
                                             <th>Created at</th>
                                             <th>Update at</th>
                                             <th>Action</th>
@@ -133,13 +117,29 @@
                                             text-overflow: ellipsis !important;
                                         }
                                     </style>
-                                        <?php foreach ($users as $user): ?>
+                        <?php foreach ($users as $user): ?>
                                         <tr>
                                             <td><?= $user['id'] ?></td>
                                             <td><?= $user['username'] ?></td>
                                             <td><?= $user['email'] ?></td>
                                             <td><?= $user['phone_number'] ?></td>
-                                            <td ><?= $user['address'] ?></td>
+                                            <td><?= $user['address'] ?></td>
+                                            <td class="d-flex justify-content-center">
+                                                <?php 
+                                                    // Tentukan teks dan kelas berdasarkan level_user_id
+                                                    if ($user['level_user_id'] == 1) {
+                                                        $text = 'Admin ';
+                                                        $btnClass = 'btn-danger'; // Kelas untuk background warning
+                                                    } elseif ($user['level_user_id'] == 2) {
+                                                        $text = 'User';
+                                                        $btnClass = 'btn-warning'; // Kelas untuk background primary
+                                                    } else {
+                                                        $text = 'Unknown'; // Jika level tidak dikenali
+                                                        $btnClass = 'btn-secondary'; // Kelas default
+                                                    }
+                                                ?>
+                                                <button class="btn text-white m-auto <?= $btnClass ?> btn-sm"><?= $text ?></button>
+                                            </td>
 
                                             <td><?= $user['created_at'] ?></td>
                                             <td><?= $user['updated_at'] ?></td>
@@ -208,6 +208,16 @@
                             <label for="password" class="form-label">Password</label>
                             <input type="password" class="form-control" id="password" name="F_password" required>
                         </div>
+                        <div class="mb-3">
+                            <label for="role" class="form-label">Role</label>
+                            <select class="form-select" id="role" name="F_role" required>
+                                <option value="2">1 For Admin / 2 For User</option> 
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                            </select>
+                        </div>
+                        
+
                         <div class="mb-3">
                             <label for="phone_number" class="form-label">Phone Number</label>
                             <input type="text" class="form-control" id="phone_number" name="F_phone_number" placeholder="628 xxx xxxx xxx" required>
