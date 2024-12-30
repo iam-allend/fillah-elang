@@ -101,4 +101,15 @@ class Home extends BaseController
         ]);
     }
 
+
+    public function contact(){
+        return view('frontend/contact');
+    }
+    public function about(){
+        return view('frontend/about');
+    }
+    public function blog(){
+        return view('frontend/blog');
+    }
+    
 }

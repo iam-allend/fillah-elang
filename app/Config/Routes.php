@@ -56,6 +56,11 @@ $routes->group('admin', ['filter' => 'admin'], function($routes) {
 // });
     // $routes->get('/user/profile', 'LoginUsers::profile', ['filter' => 'auth']);
 
+    $routes->get('/contact', 'Home::contact');
+    $routes->get('/about', 'Home::about');
+    $routes->get('/blog', 'Home::blog');
+
+
     $routes->get('profile', 'LoginUsers::profile', ['filter' => 'auth']);
     $routes->post('updateProfile', 'LoginUsers::updateProfile', ['filter' => 'auth']);
     // $routes->get('keranjang', 'LoginUsers::keranjang', ['filter' => 'auth']);

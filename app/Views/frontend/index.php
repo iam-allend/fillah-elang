@@ -43,14 +43,12 @@
 
 				<div class="collapse navbar-collapse" id="navbarsFurni">
 					<ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
-						<li class="nav-item active">
-							<a class="nav-link" href="<?= base_url() ?>">Home</a>
-						</li>
+						<li class="active"><a class="nav-link" href="<?= base_url() ?>">Home</a></li>
 						<li><a class="nav-link" href="<?= base_url('shop') ?>">Shop</a></li>
-						<li><a class="nav-link" href="about.html">About us</a></li>
-						<!-- <li><a class="nav-link" href="services.html">Services</a></li>-->
-						<li><a class="nav-link" href="blog.html">Blog</a></li> 
-						<li><a class="nav-link" href="contact.html">Contact us</a></li>
+						<li><a class="nav-link" href="<?= base_url('about') ?>">About us</a></li>
+						<!-- <li><a class="nav-link" href="<?= base_url('services') ?>">Services</a></li>-->
+						<li><a class="nav-link" href="<?= base_url('blog') ?>">Blog</a></li> 
+						<li><a class="nav-link" href="<?= base_url('contact') ?>">Contact us</a></li>
 					</ul>
 
 					<ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
@@ -78,7 +76,7 @@
 							<div class="intro-excerpt">
 								<h1>Oleh Oleh <span clsas="d-block">Kota Semarang</span></h1>
 								<p class="mb-4 text-white">Kalau kata nenekku "Tiada Ketawa yang serenyah satu ini"</p>
-								<p><a href="" class="btn btn-shop-now me-2">Shop Now</a><a href="#" class="btn bg-transparent border-1 border-white">Explore</a></p>
+								<p><a href="shop" class="btn btn-shop-now me-2">Shop Now</a><a href="home" class="btn bg-transparent border-1 border-white">Explore</a></p>
 							</div>
 						</div>
 						<div class="col-lg-7">
@@ -633,7 +631,7 @@
 		<script src="<?= base_url('frontend/js/tiny-slider.js') ?>"></script>
 		<script src="<?= base_url('frontend/js/custom.js') ?>"></script>
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-			<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 	</body>
 

@@ -17,8 +17,6 @@
   <meta name="keywords" content="bootstrap, bootstrap4" />
 
 		<link rel="icon" type="image/x-icon" href="<?= base_url('frontend/images/logo-circle-bgwhite.png') ?>">
-
-
 		<!-- Bootstrap CSS -->
 		<link href="<?= base_url('frontend/css/bootstrap.min.css') ?>" rel="stylesheet">
 		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
@@ -43,14 +41,12 @@
 
 				<div class="collapse navbar-collapse" id="navbarsFurni">
 					<ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
-						<li class="nav-item ">
-							<a class="nav-link" href="<?= base_url() ?>">Home</a>
-						</li>
+						<li><a class="nav-link" href="<?= base_url() ?>">Home</a></li>
 						<li class="active"><a class="nav-link" href="<?= base_url('shop') ?>">Shop</a></li>
-						<li><a class="nav-link" href="about.html">About us</a></li>
-						<!-- <li><a class="nav-link" href="services.html">Services</a></li>-->
-						<li><a class="nav-link" href="blog.html">Blog</a></li> 
-						<li><a class="nav-link" href="contact.html">Contact us</a></li>
+						<li><a class="nav-link" href="<?= base_url('about') ?>">About us</a></li>
+						<!-- <li><a class="nav-link" href="<?= base_url('services') ?>">Services</a></li>-->
+						<li><a class="nav-link" href="<?= base_url('blog') ?>">Blog</a></li> 
+						<li><a class="nav-link" href="<?= base_url('contact') ?>">Contact us</a></li>
 					</ul>
 
 					<ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">

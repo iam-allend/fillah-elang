@@ -16,14 +16,15 @@
   <meta name="description" content="" />
   <meta name="keywords" content="bootstrap, bootstrap4" />
 
+    	<link rel="icon" type="image/x-icon" href="<?= base_url('frontend/images/logo-circle-bgwhite.png') ?>">
 		<!-- Bootstrap CSS -->
-		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="<?= base_url('frontend/css/bootstrap.min.css') ?>" rel="stylesheet">
 		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-		<link href="css/tiny-slider.css" rel="stylesheet">
-		<link href="css/style.css" rel="stylesheet">
-		<title>Fillah Elang.</title>
+		<link href="<?= base_url('frontend/css/tiny-slider.css') ?>" rel="stylesheet">
+		<link href="<?= base_url('frontend/css/style.css') ?>" rel="stylesheet">
+		<title>Fillah Elang</title>
 	</head>
 
 	<body>
@@ -40,19 +41,26 @@
 
 				<div class="collapse navbar-collapse" id="navbarsFurni">
 					<ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
-						<li class="nav-item">
-							<a class="nav-link" href="index.html">Home</a>
+						<li class="nav-item ">
+							<a class="nav-link" href="<?= base_url() ?>">Home</a>
 						</li>
-						<li><a class="nav-link" href="shop.html">Shop</a></li>
-						<li><a class="nav-link" href="about.html">About us</a></li>
-						<!-- <li><a class="nav-link" href="services.html">Services</a></li>-->
-						<li><a class="nav-link" href="blog.html">Blog</a></li> 
-						<li class="active"><a class="nav-link" href="contact.html">Contact us</a></li>
+						<li><a class="nav-link" href="<?= base_url('shop') ?>">Shop</a></li>
+						<li><a class="nav-link" href="<?= base_url('about') ?>">About us</a></li>
+						<!-- <li><a class="nav-link" href="<?= base_url('services') ?>">Services</a></li>-->
+						<li><a class="nav-link" href="<?= base_url('blog') ?>">Blog</a></li> 
+						<li class="active"><a class="nav-link" href="<?= base_url('contact') ?>">Contact us</a></li>
 					</ul>
 
 					<ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
-						<li><a class="nav-link" href="#"><img src="images/user.svg"></a></li>
-						<li><a class="nav-link" href="cart.html"><img src="images/cart.svg"></a></li>
+						<?php if (session()->get('logged_in')): ?>
+							<!-- Cart Icon -->
+							<li><a class="nav-link" href="<?= base_url('keranjang') ?>"><img src="<?= base_url() ?>frontend/images/cart.svg"></a></li>
+							<li><a class="nav-link" href="<?= base_url('profile') ?>"><img style="width: 35px; height: 35px; object-fit: cover; border-radius: 50%; border: 2px solid white;" src="<?= base_url(session()->get('img_user')) ?>"></a></li>
+
+						<?php else: ?>
+							<!-- Login Button -->
+							<a href="/login" class="login-btn btn border-0 text-dark bg-white py-1">Login</a>
+						<?php endif; ?>
 					</ul>
 				</div>
 			</div>
@@ -68,7 +76,7 @@
 							<div class="intro-excerpt">
 								<h1>Contact</h1>
 								<p class="mb-4">Jika anda memiliki pertanyaan atau ingin menghubungi saya, silahkan menghubungi saya melalui WhatsApp atau Sosial Media Kami.</p>
-								<p><a href="" class="btn btn-secondary me-2">Shop Now</a><a href="#" class="btn btn-white-outline">Explore</a></p>
+								<p><a href="shop" class="btn btn-secondary me-2">Shop Now</a><a href="ho" class="btn btn-white-outline">Explore</a></p>
 							</div>
 						</div>
 						<div class="col-lg-7">
@@ -282,11 +290,13 @@
 			</div>
 		</footer>
 		<!-- End Footer Section -->	
+		
 
-
-		<script src="js/bootstrap.bundle.min.js"></script>
-		<script src="js/tiny-slider.js"></script>
-		<script src="js/custom.js"></script>
+		<script src="<?= base_url('frontend/js/bootstrap.bundle.min.js') ?>"></script>
+		<script src="<?= base_url('frontend/js/tiny-slider.js') ?>"></script>
+		<script src="<?= base_url('frontend/js/custom.js') ?>"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	</body>
 
 </html>
