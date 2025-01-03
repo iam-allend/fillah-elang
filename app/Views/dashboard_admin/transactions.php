@@ -15,11 +15,25 @@
         <link href="<?= base_url()?>dashboard_admin/css/custom-styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     
+        <style>
+            .btn-teal{
+                background-color: #20C997;
+                color: white;
+            }
+            .btn-danger{
+                background-color: #FB4141;
+                border: 0;
+                color: white;
+            }
+            .opacity-set{
+                opacity: 0.6;
+            }
+        </style>
     </head>
     <body>
-        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+        <nav class="sb-topnav navbar navbar-expand navbar-light bg-white">
             <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="index.html">Start Bootstrap</a>
+            <a class="navbar-brand ps-3" href="index.html">DASHBOARD</a>
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
@@ -62,7 +76,11 @@
                             <div class="sb-sidenav-menu-heading">ACTIVITY</div>
                             <a class="nav-link active" href="<?= base_url()?>admin/transactions">
                                 <div class="sb-nav-link-icon"><i class="fa-solid fa-money-bill-transfer"></i></div>
-                                Transaction
+                                Transaksi
+                            </a>
+                            <a class="nav-link" href="<?= base_url()?>admin/cart-user">
+                                <div class="sb-nav-link-icon"><i class="fa-solid fa-cart-shopping"></i></div>
+                                Keranjang user
                             </a>
                             <div class="sb-sidenav-menu-heading">MASTER DATA</div>
                             <a class="nav-link " href="<?= base_url()?>admin/users">
@@ -71,7 +89,7 @@
                             </a>
                             <a class="nav-link" href="<?= base_url()?>admin/products">
                                 <div class="sb-nav-link-icon"><i class="fa-solid fa-boxes-stacked"></i></div>
-                                Product
+                                Produk
                             </a>
                             
                         </div>
@@ -98,12 +116,14 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
                         <?php endif; ?>
-                        <h1 class="mt-4">Transactions Manage</h1>
+                        <h2 class="my-5">Kelola Data Transaksi</h2>
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
-                                Transaction Data
-                                <button class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#addTransactionModal">Add Transaction</button>
+                                Daftar Data Transaksi
+                                <button class="btn btn-warning float-end" data-bs-toggle="modal" data-bs-target="#addTransactionModal">
+                                    <i class="fa-solid fa-plus"></i>
+                                    Tambah Transaksi</button>
                             </div>
                             <div class="card-body">
                                 <table id="datatablesSimple">
@@ -112,14 +132,13 @@
                                             <th>ID</th>
                                             <th>User</th>
                                             <th>Email</th>
-                                            <th>Product</th>
-                                            <th>Quantity</th>
-                                            <th>Total Price</th>
+                                            <th>Produk</th>
+                                            <th class="text-center">Jumlah</th>
+                                            <th>Total Harga</th>
                                             <th>Status</th>
-                                            <th>Order Date</th>
+                                            <th>Tanggal Order</th>
                                             <th>Alamat</th>
-                                            <th>Admin Review</th>
-                                            <th>Action</th>
+                                            <th>Kelola</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -127,16 +146,18 @@
                                             <th>ID</th>
                                             <th>User</th>
                                             <th>Email</th>
-                                            <th>Product</th>
-                                            <th>Quantity</th>
-                                            <th>Total Price</th>
+                                            <th>Produk</th>
+                                            <th>Jumlah</th>
+                                            <th>Total Harga</th>
                                             <th>Status</th>
-                                            <th>Order Date</th>
+                                            <th>Tanggal Order</th>
                                             <th>Alamat</th>
-                                            <th>Admin Review</th>
-                                            <th>Action</th>
+                                            <th>Kelola</th>
                                         </tr>
                                     </tfoot>
+
+                                    
+                                    
                                     <tbody>
                                         <?php foreach($transactions as $transaction): ?>
                                         <tr>
@@ -146,12 +167,38 @@
                                             <td><?= $transaction['name']; ?></td>
                                             <td><?= $transaction['quantity']; ?></td>
                                             <td><?= $transaction['total_price']; ?></td>
-                                            <td><?= $transaction['status']; ?></td>
+                                            <td>
+                                                <?php 
+                                                    $status = esc($transaction['status']);
+                                                    $btnClass = '';
+                                                    $btnText = '';
+
+                                                    switch ($status) {
+                                                        case 'Pending':
+                                                            $btnClass = 'btn-success opacity-set'; // Kelas untuk status Pending
+                                                            $btnText = 'Diproses';
+                                                            break;
+                                                        case 'Shipping':
+                                                            $btnClass = 'btn-success text-white'; // Kelas untuk status Shipping
+                                                            $btnText = 'Pengiriman';
+                                                            break;
+                                                        case 'Completed':
+                                                            $btnClass = 'btn-warning text-white'; // Kelas untuk status Completed
+                                                            $btnText = 'Terkirim';
+                                                            break;
+                                                        case 'Cancelled':
+                                                            $btnClass = 'btn-secondary opacity-set'; // Kelas untuk status Cancelled
+                                                            $btnText = 'Dibatalkan';
+                                                            break;
+                                                    }
+                                                ?>
+                                                <button class="btn <?= $btnClass ?>"><?= $btnText ?></button>
+                                            </td>
+
                                             <td><?= $transaction['order_date']; ?></td>
                                             <td><?= $transaction['province']; ?>, <?= $transaction['city']; ?>, <?= $transaction['alamat_kirim']; ?></td>
-                                            <td><?= $transaction['admin_review'] ? 'Reviewed' : 'Pending'; ?></td>
                                             <td>
-                                                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editTransactionModal" 
+                                                <button type="button" class="btn btn-warning text-white" data-bs-toggle="modal" data-bs-target="#editTransactionModal" 
                                                     data-id="<?= $transaction['id'] ?>" 
                                                     data-user-id="<?= $transaction['user_id'] ?>" 
                                                     data-product-id="<?= $transaction['product_id'] ?>" 
@@ -163,9 +210,9 @@
                                                     data-city="<?= $transaction['city'] ?>" 
                                                     data-alamat-kirim="<?= $transaction['alamat_kirim'] ?>" 
                                                     data-whatsapp-link="<?= $transaction['whatsapp_link'] ?>">
-                                                    Edit
+                                                    <i class="fas fa-edit me-1"></i>Edit
                                                 </button>
-                                                <a href="transactions/delete/<?= $transaction['id'] ?>" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus transaksi ini?')">Delete</a>
+                                                <a href="transactions/delete/<?= $transaction['id'] ?>" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus transaksi ini?')"> <i class="fas fa-trash me-1"></i>Delete</a>
                                             </td>
                                         </tr>
                                         <?php endforeach; ?>

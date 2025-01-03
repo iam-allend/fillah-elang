@@ -270,6 +270,7 @@
                                                 <th class="border-top-0">Alamat</th>
                                                 <th class="border-top-0">Jumlah</th>
                                                 <th class="border-top-0">Total Harga</th>
+                                                <th class="border-top-0">Ongkir</th>
                                                 <th class="border-top-0">Status</th>
                                                 <th class="border-top-0">Tanggal Pesan</th>
                                                 <th class="border-top-0">Manage</th>
@@ -289,31 +290,37 @@
                                                 <td><?= esc($transaction['province']) ?>, <?= esc($transaction['city']) ?>, <?= esc($transaction['alamat_kirim']) ?></td>
                                                 <td><?= esc($transaction['quantity']) ?></td>
                                                 <td>Rp <?= number_format($transaction['total_price'], 0, ',', '.') ?></td>
-                                                
+                                                <td><?= esc($transaction['shipping_cost']) ?></td>
                                                 <td>
                                                     <?php 
                                                         $status = esc($transaction['status']);
                                                         $btnClass = '';
+                                                        $btnText = '';
 
                                                         switch ($status) {
                                                             case 'Pending':
                                                                 $btnClass = 'btn-primary opacity-set'; // Kelas untuk status Pending
+                                                                $btnText = 'Diproses';
+                                                                
                                                                 break;
                                                             case 'Shipping':
                                                                 $btnClass = 'btn-primary'; // Kelas untuk status Shipping
+                                                                $btnText = 'Pengiriman  ';
                                                                 break;
                                                             case 'Completed':
                                                                 $btnClass = 'btn-teal'; // Kelas untuk status Completed
+                                                                $btnText = 'Terkirim';
                                                                 break;
                                                             case 'Cancelled':
                                                                 $btnClass = 'btn-danger'; // Kelas untuk status Cancelled
+                                                                $btnText = 'Dibatalkan';
                                                                 break;
                                                             default:
                                                                 $btnClass = 'btn-secondary'; // Kelas default jika status tidak dikenali
                                                                 break;
                                                         }
                                                     ?>
-                                                    <button class="btn <?= $btnClass ?>"><?= $status ?></button>
+                                                    <button class="btn <?= $btnClass ?>"><?= $btnText ?></button>
                                                 </td>
 
                                                 <td><?= date('d-m-Y', strtotime($transaction['order_date'])) ?></td>

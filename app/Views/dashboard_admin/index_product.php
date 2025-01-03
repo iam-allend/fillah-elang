@@ -17,9 +17,9 @@
     
     </head>
     <body>
-        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+        <nav class="sb-topnav navbar navbar-expand navbar-light bg-white">
             <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="index.html">Start Bootstrap</a>
+            <a class="navbar-brand ps-3" href="index.html">DASHBOARD</a>
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
@@ -61,7 +61,11 @@
                             <div class="sb-sidenav-menu-heading">ACTIVITY</div>
                             <a class="nav-link" href="<?= base_url()?>admin/transactions">
                                 <div class="sb-nav-link-icon"><i class="fa-solid fa-money-bill-transfer"></i></div>
-                                Transaction
+                                Transaksi
+                            </a>
+                            <a class="nav-link" href="<?= base_url()?>admin/cart-user">
+                                <div class="sb-nav-link-icon"><i class="fa-solid fa-cart-shopping"></i></div>
+                                Keranjang user
                             </a>
                             <div class="sb-sidenav-menu-heading">MASTER DATA</div>
                             <a class="nav-link " href="<?= base_url()?>admin/users">
@@ -70,7 +74,7 @@
                             </a>
                             <a class="nav-link active" href="<?= base_url()?>admin/products">
                                 <div class="sb-nav-link-icon"><i class="fa-solid fa-boxes-stacked"></i></div>
-                                Product
+                                Produk
                             </a>
                             
                         </div>
@@ -82,15 +86,15 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4 w-100">
-                        <h1 class="mt-4">Products Manage</h1>
+                        <h2 class="my-5">Kelola Data Produk</h2>
                         <div class="card my-4 w-100">
                             <div class="card-header w-100 position-relative d-flex justify-content-between">
                                 <h6 class="d-flex align-items-center">
                                     <i class="fas fa-box me-1"></i>
                                     Daftar Produk
                                 </h6>
-                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addProductModal">
-                                    Tambah Produk
+                                <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#addProductModal">
+                                    <i class="fa-solid fa-plus me-2"></i>Tambah Produk
                                 </button>
                             </div>
                             <div class="card-body">
@@ -98,10 +102,10 @@
                                     <thead>
                                         <tr>
                                             <th>ID</th>
+                                            <th>Gambar</th>
                                             <th>Nama Produk</th>
                                             <th>Harga</th>
                                             <th>Stok</th>
-                                            <th>Gambar</th>
                                             <th>Created at</th>
                                             <th>Updated at</th>
                                             <th>Action</th>
@@ -110,10 +114,10 @@
                                     <tfoot>
                                         <tr>
                                             <th>ID</th>
+                                            <th>Gambar</th>
                                             <th>Nama Produk</th>
                                             <th>Harga</th>
                                             <th>Stok</th>
-                                            <th>Gambar</th>
                                             <th>Created at</th>
                                             <th>Updated at</th>
                                             <th>Action</th>
@@ -123,9 +127,6 @@
                                         <?php foreach ($products as $product): ?>
                                         <tr>
                                             <td><?= $product['id'] ?></td>
-                                            <td><?= $product['name'] ?></td>
-                                            <td>Rp <?= number_format($product['price'], 0, ',', '.') ?></td>
-                                            <td><?= $product['stock'] ?></td>
                                             <td>
                                                 <?php 
                                                 $image = model('ProductImageModel')->where('product_id', $product['id'])->first();
@@ -134,18 +135,21 @@
                                                 <img src="<?= base_url($image['image_url']) ?>" alt="Product" width="50" height="50" class="img-thumbnail">
                                                 <?php endif; ?>
                                             </td>
+                                            <td><?= $product['name'] ?></td>
+                                            <td>Rp <?= number_format($product['price'], 0, ',', '.') ?></td>
+                                            <td><?= $product['stock'] ?></td>
                                             <td><?= $product['created_at'] ?></td>
                                             <td><?= $product['updated_at'] ?></td>
                                             <td>
-                                                <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editProductModal" 
+                                                <button class="btn btn-warning btn-sm text-white" data-bs-toggle="modal" data-bs-target="#editProductModal" 
                                                         onclick="editProduct(<?= htmlspecialchars(json_encode($product)) ?>)">
-                                                    <i class="fas fa-edit"></i> Edit
+                                                    <i class="fas fa-edit me-1"></i> Edit
                                                 </button>
                                                 <form action="<?= base_url('admin/products/delete/' . $product['id']) ?>" method="post" class="d-inline" 
                                                     onsubmit="return confirm('Apakah Anda yakin ingin menghapus produk ini?')">
                                                     <input type="hidden" name="_method" value="DELETE">
                                                     <button type="submit" class="btn btn-danger btn-sm">
-                                                        <i class="fas fa-trash"></i> Hapus
+                                                        <i class="fas fa-trash me-1"></i> Hapus
                                                     </button>
                                                 </form>
                                             </td>

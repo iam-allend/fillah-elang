@@ -118,13 +118,6 @@
 									<h3 class="product-title p-2"><?= $product['name'] ?></h3>
 									<strong class="product-price">Rp <?= number_format($product['price'], 0, ',', '.') ?></strong>
 
-									
-									<button class="border-0 outline-0 add-to-cart" data-product-id="<?= $product['id'] ?>">
-										<span class="icon-cross">
-											<img src="<?= base_url() ?>frontend/images/cross.svg" class="img-fluid">
-										</span>
-										
-									</button>
 								</div>
 						<?php endforeach; ?>
 						</div>
@@ -459,12 +452,11 @@
 		<footer class="footer-section">
 			<div class="container relative">
 
-				<div class="sofa-img">
-					<img src="<?= base_url() ?>frontend/images/BROWN - HORIZONTAL NO-BG.png" alt="Image" class="img-fluid">
-				</div>
+				
 
 				<div class="row">
 					<div class="col-lg-8">
+
 						<div class="subscription-form">
 							<h3 class="d-flex align-items-center"><span class="me-1"><img src="<?= base_url() ?>frontend/images/envelope-outline.svg" alt="Image" class="img-fluid"></span><span>Subscribe to Newsletter</span></h3>
 
@@ -483,6 +475,11 @@
 							</form>
 
 						</div>
+
+						<div class="sofa-img">
+							<img src="<?= base_url() ?>frontend/images/BROWN - HORIZONTAL NO-BG.png" alt="Image" class="img-fluid">
+						</div>
+
 					</div>
 				</div>
 

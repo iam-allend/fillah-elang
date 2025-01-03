@@ -4,6 +4,12 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\AdminModel;
+use App\Models\CartModel;
+use App\Models\UserModel;
+use App\Models\ProductModel;
+use App\Models\LevelModel;
+
+
 
 class DashboardAdminController extends BaseController
 {
@@ -14,16 +20,39 @@ class DashboardAdminController extends BaseController
     }
 
     // USER MANAGE ===========================
+   
     public function userManageRead()
     {
-
-        // $data['users'] = $this -> adminModel->findAll(); // Mengambil semua data user dari database 
         $adminModel = new AdminModel();
-        $data['users'] = $adminModel->getAllRole(); // Mengambil semua data user dari database
-        
+        $levelModel = new LevelModel(); // Model untuk tabel levels
+
+        // Ambil level pengguna yang sedang login
+        $currentUserLevel = session()->get('level_user_id'); // Pastikan Anda menyimpan level_user_id di session saat login
+
+        // Ambil semua pengguna
+        if ($currentUserLevel == 1) { // Jika admin
+            $data['users'] = $adminModel->where('level_user_id', 2)->findAll(); // Ambil hanya user dengan level_user_id 2
+            
+        } else if ($currentUserLevel == 3) { // Jika superadmin
+            $data['users'] = $adminModel->getAllRole(); // Ambil semua pengguna
+        }
+
+        // Ambil semua level untuk dropdown
+        $data['levels'] = $levelModel->findAll();
 
         return view('dashboard_admin/index', $data); // Mengirim data ke view 'index'
     }
+
+    // public function userManageRead()
+    // {
+
+    //     // $data['users'] = $this -> adminModel->findAll(); // Mengambil semua data user dari database 
+    //     $adminModel = new AdminModel();
+    //     $data['users'] = $adminModel->getAllRole(); // Mengambil semua data user dari database
+        
+
+    //     return view('dashboard_admin/index', $data); // Mengirim data ke view 'index'
+    // }
 
     public function addUser()
     {
@@ -31,6 +60,8 @@ class DashboardAdminController extends BaseController
         
         // Ambil data dari form
         $data = [
+            'first_name' => $this->request->getPost('F_first_name'),
+            'last_name' => $this->request->getPost('F_last_name'),
             'username' => $this->request->getPost('F_username'),
             'email' => $this->request->getPost('F_email'),
             'phone_number' => $this->request->getPost('F_phone_number'),
@@ -54,10 +85,13 @@ class DashboardAdminController extends BaseController
 
         // Ambil data dari form
         $data = [
+            'first_name' => $this->request->getPost('F_firstname'),
+            'last_name' => $this->request->getPost('F_lastname'),
             'username' => $this->request->getPost('F_username'),
             'email' => $this->request->getPost('F_email'),
             'phone_number' => $this->request->getPost('F_phone_number'),
-            'address' => $this->request->getPost('F_address')
+            'address' => $this->request->getPost('F_address'),
+            'level_user_id' => $this->request->getPost('F_role'),
         ];
 
         // Cek apakah ada file gambar yang diupload
@@ -67,7 +101,7 @@ class DashboardAdminController extends BaseController
             $imgPath = 'img/img_users/';
 
             // Hapus gambar lama jika bukan gambar default
-            if ($user['img_user'] != $imgPath . 'default.svg') {
+            if ($user['img_user'] && $user['img_user'] != 'img/default.svg') {
                 // Menggunakan path direktori tanpa base_url()
                 @unlink($user['img_user']);
             }
@@ -80,10 +114,12 @@ class DashboardAdminController extends BaseController
 
         // Update data berdasarkan ID
         $adminModel->update($id, $data);
+        
+        $this->updateSessionData($id);
 
-        return redirect()->to('/admin')->with('success', 'User updated successfully');
+        // Menyimpan pesan sukses dengan ID pengguna
+        return redirect()->to('/admin')->with('success', "Data user (ID: $id) berhasil diupdate");
     }
-
 
     public function delete($id)
     {
@@ -97,6 +133,7 @@ class DashboardAdminController extends BaseController
 
         // Hapus data user dari database
         $adminModel->delete($id);
+        $this->updateSessionData($id);
 
         return redirect()->to('/admin')->with('success', 'User deleted successfully');
     }
@@ -107,5 +144,93 @@ class DashboardAdminController extends BaseController
     {
 
         return view('dashboard_admin/layout-static');
+    }
+
+
+    public function cart(){
+
+        $cartModel = new CartModel();
+        $data['carts'] = $cartModel->getCartsWithDetails();
+
+        // Ambil data pengguna dan produk untuk dropdown
+        $userModel = new UserModel();
+        $data['users'] = $userModel->findAll();
+
+        $productModel = new ProductModel();
+        $data['products'] = $productModel->findAll();
+
+        return view('dashboard_admin/cart-user', $data); // Ganti 'cart_view' dengan nama view Anda
+
+    }
+
+    public function add_carts()
+    {
+        $cartModel = new CartModel();
+
+        // Validasi input
+        $data = [
+            'user_id' => $this->request->getPost('user_id'),
+            'product_id' => $this->request->getPost('product_id'),
+            'quantity' => $this->request->getPost('quantity'),
+            'created_at' => date('Y-m-d H:i:s'), // Set created_at ke waktu saat ini
+        ];
+
+        // Tambahkan data cart
+        if ($cartModel->insert($data)) {
+            return redirect()->to('admin/cart-user')->with('success', 'Data keranjang user berhasil ditambahkan!');
+        } else {
+            return redirect()->to('admin/cart-user')->with('error', 'Gagal menambahkan data keranjang user.');
+        }
+    }
+
+    public function update_carts()
+    {
+        $cartModel = new CartModel();
+        $cartId = $this->request->getPost('cartId');
+
+        // Validasi input
+        $data = [
+            'user_id' => $this->request->getPost('user_id'),
+            'product_id' => $this->request->getPost('product_id'),
+            'quantity' => $this->request->getPost('quantity'),
+            'updated_at' => date('Y-m-d H:i:s'),
+        ];
+
+        // Update data cart
+        if ($cartModel->update($cartId, $data)) {
+            return redirect()->to('/admin/cart-user')->with('success', 'Data keranjang berhasil diperbarui!');
+        } else {
+            return redirect()->to('/admin/cart-user')->with('error', 'Gagal memperbarui data keranjang.');
+        }
+    }
+
+    public function delete_carts($id)
+    {
+        $cartModel = new CartModel();
+
+        // Hapus data cart berdasarkan ID
+        if ($cartModel->delete($id)) {
+            return redirect()->to('/admin/cart-user')->with('success', 'Data keranjang user berhasil dihapus!');
+        } else {
+            return redirect()->to('/admin/cart-user')->with('error', 'Gagal menghapus data keranjang user.');
+        }
+    }
+
+
+
+    private function updateSessionData($id)
+    {
+        $adminModel = new AdminModel();
+        $user = $adminModel->find($id); // Ambil data terbaru dari database
+
+        // Perbarui data sesi
+        session()->set([
+            'username' => $user['username'],
+            'email' => $user['email'],
+            'phone_number' => $user['phone_number'],
+            'address' => $user['address'],
+            'level_user_id' => $user['level_user_id'],
+            'img_user' => $user['img_user'], // Jika Anda menyimpan gambar pengguna di sesi
+        ]);
     }
 }

@@ -9,7 +9,7 @@ class UserModel extends Model
     protected $table = 'users'; // Nama tabel yang digunakan
     protected $primaryKey = 'id'; // Primary key tabel
     protected $allowedFields  = [
-        'email', 'username', 'password', 'pass_confirm', 'phone_number', 'address', 'img_user'
+        'email', 'username', 'first_name', 'last_name', 'password', 'pass_confirm', 'phone_number', 'address', 'level_user_id', 'img_user'
     ];
     protected $useTimestamps = true; 
 

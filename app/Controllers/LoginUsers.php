@@ -33,21 +33,21 @@ class LoginUsers extends BaseController
     }
 
     public function index()
-{        
-        $adminModel = new AdminModel();
-        $data['users'] = $adminModel;
-
+    {
         // Jika sudah login, redirect ke halaman yang sesuai
         if (session()->get('logged_in')) {
-            return redirect()->to(session()->get('level_user_id') == 1 ? '/admin/dashboard' : '/');
+            return redirect()->to(session()->get('level_user_id') == 1 ? '/admin/dashboard1' : '/');
+        }else{
+            return view('login/index');
         }
-        return view('login/index');
+        
     }
+
 
     public function attemptLogin()
     {
         $rules = [
-            'username_or_email' => 'required', // Ganti ke 'username_or_email' agar lebih general
+            'username_or_email' => 'required',
             'password' => 'required'
         ];
 
@@ -72,15 +72,15 @@ class LoginUsers extends BaseController
                 'username' => $user['username'],
                 'email' => $user['email'],
                 'phone_number' => $user['phone_number'],
-                'address' => $user['address'], // Pastikan kolom address tersedia di tabel users
-                'img_user' => $user['img_user'], // Pastikan kolom img_user tersedia di tabel users
+                'address' => $user['address'],
+                'img_user' => $user['img_user'],
                 'level_user_id' => $user['level_user_id'],
                 'logged_in' => TRUE
             ];
             
             session()->set($sessionData);
             
-            return redirect()->to($user['level_user_id'] == 1 ? '/admin/dashboard' : '/')
+            return redirect()->to($user['level_user_id'] != 2 ? '/admin/dashboard' : '/')
                         ->with('success', 'Login successful');
         }
         

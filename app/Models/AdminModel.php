@@ -11,7 +11,7 @@ class AdminModel extends Model
     protected $table = 'users'; // Nama tabel yang digunakan
     protected $primaryKey = 'id'; // Primary key tabel
     protected $allowedFields  = [
-    'email', 'username', 'password', 'pass_confirm', 'phone_number', 'level_user_id', 'address', 'img_user' // Add any other fields
+    'username', 'first_name', 'last_name', 'email', 'username', 'password', 'pass_confirm', 'phone_number', 'level_user_id', 'address', 'img_user' // Add any other fields
     ];
 
     protected $useTimestamps = true; 

@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -16,8 +18,25 @@
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 
     </head>
+
+<style>
+    tr td{
+        max-width: 150px !important; 
+        white-space: nowrap !important; 
+        overflow: hidden !important; 
+        text-overflow: ellipsis !important;
+    }
+    button.btn.text-white.m-auto{
+        justify-content: center !important;
+        align-content: center !important;
+        align-items: center !important;
+        align-self: center !important;
+        display: flex !important;
+        position: relative !important;
+    }
+</style>
     <body>
-        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+        <nav class="sb-topnav navbar navbar-expand navbar-light bg-white">
             <!-- Navbar Brand-->
             <a class="navbar-brand ps-3" href="index.html">DASHBOARD</a>
             <!-- Sidebar Toggle-->
@@ -51,8 +70,21 @@
                     <div class="sb-sidenav-footer d-flex align-content-center">
                         <img class="img-pp-dashboard m-1" src="<?= base_url('' . session()->get('img_user')); ?>" alt="">
                         <div class="name-admin m-1">
-                            <span class=""><?= session()->get('username'); ?></span>
-                            <span class="small">Admin</span>
+                            <span class="d-block "><?= session()->get('username'); ?></span>
+                            <span class="d-block small">
+                                    <?php 
+                                        $levelUserId = session()->get('level_user_id');
+                                        if ($levelUserId == 1) {
+                                            echo 'Admin';
+                                        } elseif ($levelUserId == 2) {
+                                            echo 'User ';
+                                        } elseif ($levelUserId == 3) {
+                                            echo 'Superadmin';
+                                        } else {
+                                            echo 'Unknown'; // Jika level tidak dikenali
+                                        }
+                                    ?>
+                                </span>
                         </div>
                     </div>
 
@@ -62,7 +94,11 @@
                             <div class="sb-sidenav-menu-heading">ACTIVITY</div>
                             <a class="nav-link" href="<?= base_url()?>admin/transactions">
                                 <div class="sb-nav-link-icon"><i class="fa-solid fa-money-bill-transfer"></i></div>
-                                Transaction
+                                Transaksi
+                            </a>
+                            <a class="nav-link" href="<?= base_url()?>admin/cart-user">
+                                <div class="sb-nav-link-icon"><i class="fa-solid fa-cart-shopping"></i></div>
+                                Keranjang user
                             </a>
                             <div class="sb-sidenav-menu-heading">MASTER DATA</div>
                             <a class="nav-link active" href="<?= base_url()?>admin/users">
@@ -71,7 +107,7 @@
                             </a>
                             <a class="nav-link" href="<?= base_url()?>admin/products">
                                 <div class="sb-nav-link-icon"><i class="fa-solid fa-boxes-stacked"></i></div>
-                                Product
+                                Produk
                             </a>
                             
                         </div>
@@ -81,17 +117,24 @@
             </div>
 
             <div id="layoutSidenav_content">
-
+                                        
                 <main>
+                    
                     <div class="container-fluid px-4">
-                    <h1 class="mt-4">Users Manage</h1>
+                    <h2 class="my-5">Kelola Data user</h2>
+                    <?php if (session()->getFlashdata('success')): ?>
+                        <div class="alert alert-success">
+                            <?= session()->getFlashdata('success') ?>
+                        </div>
+                    <?php endif; ?>
                     <div class="card my-4 ">
                             <div class="card-header w-100 position-relative d-flex justify-content-between">
                                 <h6 class="d-flex align-items-center">
                                     <i class="fas fa-table me-1"></i>
                                     DataTable Example
                                 </h6>
-                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal">Add User</button>
+                                <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#addUserModal">
+                                    <i class="fa-solid fa-plus me-2"></i>Tambah User</button>
                             </div>
                             <div class="card-body">
                                 <table id="datatablesSimple">
@@ -109,30 +152,25 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    <style>
-                                        tr td{
-                                            max-width: 150px !important; 
-                                            white-space: nowrap !important; 
-                                            overflow: hidden !important; 
-                                            text-overflow: ellipsis !important;
-                                        }
-                                    </style>
-                        <?php foreach ($users as $user): ?>
+                                    
+                                    <?php foreach ($users as $user): ?>
                                         <tr>
                                             <td><?= $user['id'] ?></td>
                                             <td><?= $user['username'] ?></td>
                                             <td><?= $user['email'] ?></td>
                                             <td><?= $user['phone_number'] ?></td>
                                             <td><?= $user['address'] ?></td>
-                                            <td class="d-flex justify-content-center">
+                                            <td>
                                                 <?php 
-                                                    // Tentukan teks dan kelas berdasarkan level_user_id
                                                     if ($user['level_user_id'] == 1) {
                                                         $text = 'Admin ';
-                                                        $btnClass = 'btn-danger'; // Kelas untuk background warning
+                                                        $btnClass = 'btn-success';
                                                     } elseif ($user['level_user_id'] == 2) {
                                                         $text = 'User';
-                                                        $btnClass = 'btn-warning'; // Kelas untuk background primary
+                                                        $btnClass = 'btn-secondary';
+                                                    } elseif ($user['level_user_id'] == 3) {
+                                                        $text = 'Super';
+                                                        $btnClass = 'btn-danger';
                                                     } else {
                                                         $text = 'Unknown'; // Jika level tidak dikenali
                                                         $btnClass = 'btn-secondary'; // Kelas default
@@ -144,18 +182,26 @@
                                             <td><?= $user['created_at'] ?></td>
                                             <td><?= $user['updated_at'] ?></td>
                                             <td>
-                                                <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editUserModal" onclick="
-                                                editUser(
-                                                    <?= $user['id'] ?>, 
-                                                    '<?= $user['username'] ?>', 
-                                                    '<?= $user['email'] ?>', 
-                                                    '<?= $user['phone_number'] ?>', 
-                                                    '<?= $user['address'] ?>',
-                                                    '<?= base_url($user['img_user']) ?>'
-                                                    )"
-                                                    
-                                                ><i class="fas fa-edit"></i> Edit</button>
-                                                <a class="btn btn-danger btn-sm" href="admin/users/delete/<?= $user['id'] ?>" onclick="return confirm('Yakin Ingin Menghapus Data ini??')"><i class="fas fa-trash"></i> Delete</a>
+                                                <?php if ($user['level_user_id'] != 3): // Jika bukan superadmin ?>
+                                                    <button class="btn btn-warning btn-sm text-white" data-bs-toggle="modal" data-bs-target="#editUserModal" onclick="
+                                                    editUser  (
+                                                        <?= $user['id'] ?>, 
+                                                        '<?= $user['first_name'] ?>',
+                                                        '<?= $user['last_name'] ?>',    
+                                                        '<?= $user['username'] ?>', 
+                                                        '<?= $user['email'] ?>', 
+                                                        '<?= $user['phone_number'] ?>', 
+                                                        '<?= $user['address'] ?>',
+                                                        '<?= $user['level_user_id'] ?>',
+                                                        '<?= base_url($user['img_user']) ?>'
+                                                        )"
+                                                    >
+                                                    <i class="fas fa-edit me-1"></i> Edit</button>
+
+                                                    <a class="btn btn-danger btn-sm" href="<?= base_url('admin/users/delete/' . $user['id']) ?>" onclick="return confirm('Yakin Ingin Menghapus Data ini??')">
+                                                        <i class="fas fa-trash me-1"></i> Delete
+                                                    </a>
+                                                <?php endif; ?>
                                             </td>
                                         </tr>
                                         <?php endforeach; ?>
@@ -211,9 +257,13 @@
                         <div class="mb-3">
                             <label for="role" class="form-label">Role</label>
                             <select class="form-select" id="role" name="F_role" required>
-                                <option value="2">1 For Admin / 2 For User</option> 
-                                <option value="1">1</option>
-                                <option value="2">2</option>
+                                <?php if (session()->get('level_user_id') == 3): // Jika superadmin ?>
+                                    <?php foreach ($levels as $level): ?>
+                                        <option value="<?= $level['levelid'] ?>"><?= $level['levelnama'] ?></option>
+                                    <?php endforeach; ?>
+                                <?php else: // Jika admin ?>
+                                    <option value="2">User </option> <!-- Hanya bisa menambah user -->
+                                <?php endif; ?>
                             </select>
                         </div>
                         
@@ -246,7 +296,7 @@
                         <!-- Pratinjau Gambar -->
                         <div class="mb-3">
                             <label for="previewImage" class="form-label d-block">Current Profile Image</label>
-                            <img class="rounded-2 p-1 form-control" id="previewImage" src="<?= base_url('img/default.png') ?>" alt="Profile Image" style="width: 100px;">
+                            <img class="rounded-2 p-1 form-control" id="previewImage" src="<?= base_url($user['img_user'] ?? 'img/default.svg') ?>" alt="Profile Image" style="width: 100px;">
                         </div>
                         <!-- Input Upload Gambar -->
                         <div class="mb-3">
@@ -254,6 +304,14 @@
                             <input type="file" class="form-control" id="imgUser" name="img_user" onchange="previewImage(this);">
                         </div>
                         <!-- Field Lainnya -->
+                        <div class="mb-3">
+                            <label for="editFirstName" class="form-label">Nama Depan</label>
+                            <input type="text" class="form-control" id="editFirstName" name="F_firstname">
+                        </div>
+                        <div class="mb-3">
+                            <label for="editLastName" class="form-label">Nama Belakang</label>
+                            <input type="text" class="form-control" id="editLastName" name="F_lastname">
+                        </div>
                         <div class="mb-3">
                             <label for="editUsername" class="form-label">Username</label>
                             <input type="text" class="form-control" id="editUsername" name="F_username">
@@ -270,6 +328,19 @@
                             <label for="editAddress" class="form-label">Alamat</label>
                             <textarea type="textarea" class="form-control" id="editAddress" name="F_address"></textarea>
                         </div>
+
+                        <?php if (session()->get('level_user_id') == 3): // Jika superadmin ?>
+                        <div class="mb-3">
+                            <label for="editRole" class="form-label">Role</label>
+                            <select class="form-select" id="editRole" name="F_role">
+                                <option value="<?= $level['levelid'] ?>">Pilih Role</option>
+                                <?php foreach ($levels as $level): ?>
+                                    <option value="<?= $level['levelid'] ?>"><?= $level['levelnama'] ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <?php endif; ?>
+
                         <input type="datetime-local" class="" id="editupdate_at" name="F_update_at" hidden>
                     </div>
                     <div class="modal-footer">
@@ -295,14 +366,15 @@
     </script>
     <script>
     // Modifikasi fungsi editUser agar juga mengatur src dari imgPreview
-    function editUser(id, username, email, phone_number, address, img_user) {
+    function editUser(id, first_name, last_name, username, email, phone_number, address, level_user_id, img_user) {
         document.getElementById('editUserId').value = id;
+        document.getElementById('editFirstName').value = first_name;
+        document.getElementById('editLastName').value = last_name;
         document.getElementById('editUsername').value = username;
         document.getElementById('editEmail').value = email;
         document.getElementById('editPhone').value = phone_number;
         document.getElementById('editAddress').value = address;
-        
-        // Set preview image URL
+        document.getElementById('editRole').value = level_user_id;
         document.getElementById('previewImage').src = img_user;
     }
     </script>

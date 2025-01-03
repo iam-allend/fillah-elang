@@ -22,7 +22,7 @@ $routes->post('/register', 'LoginUsers::attemptRegister');
 $routes->get('/logout', 'LoginUsers::logout');
 
 // Admin routes (with admin filter)
-$routes->group('admin', ['filter' => 'admin'], function($routes) {
+$routes->group('admin', ['filter' => 'admin'] || ['filter' => 'superadmin'], function($routes) {
     
     $routes->get('', 'DashboardAdminController::userManageRead'); // DEFAULT PAGE SEMENTARA
 
@@ -48,6 +48,12 @@ $routes->group('admin', ['filter' => 'admin'], function($routes) {
     $routes->post('transactions/update/(:num)', 'TransactionController::update/$1');
     $routes->get('transactions/delete/(:num)', 'TransactionController::delete/$1');
     $routes->get('transactions/edit/(:num)', 'TransactionController::edit/$1');
+
+    $routes->get('cart-user', 'DashboardAdminController::cart');
+    $routes->post('carts/update', 'DashboardAdminController::update_carts');
+    $routes->post('carts/add', 'DashboardAdminController::add_carts');
+    $routes->get('carts/delete/(:num)', 'DashboardAdminController::delete_carts/$1'); // Rute untuk menghapus cart
+
 });
 
 // Protected routes (require login)
