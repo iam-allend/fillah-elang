@@ -1,0 +1,27 @@
+[05-Jan-2025 05:32:07 UTC] PHP Fatal error:  Declaration of CodeIgniter\I18n\TimeTrait::createFromTimestamp(int $timestamp, $timezone = null, ?string $locale = null) must be compatible with DateTimeImmutable::createFromTimestamp(int|float $timestamp): static in /home/dtip1888/fillah-elang/vendor/codeigniter4/framework/system/I18n/TimeTrait.php on line 268
+[05-Jan-2025 05:32:08 UTC] PHP Fatal error:  Declaration of CodeIgniter\I18n\TimeTrait::createFromTimestamp(int $timestamp, $timezone = null, ?string $locale = null) must be compatible with DateTimeImmutable::createFromTimestamp(int|float $timestamp): static in /home/dtip1888/fillah-elang/vendor/codeigniter4/framework/system/I18n/TimeTrait.php on line 268
+[05-Jan-2025 05:32:16 UTC] PHP Fatal error:  Declaration of CodeIgniter\I18n\TimeTrait::createFromTimestamp(int $timestamp, $timezone = null, ?string $locale = null) must be compatible with DateTimeImmutable::createFromTimestamp(int|float $timestamp): static in /home/dtip1888/fillah-elang/vendor/codeigniter4/framework/system/I18n/TimeTrait.php on line 268
+[05-Jan-2025 05:32:35 UTC] PHP Fatal error:  Declaration of CodeIgniter\I18n\TimeTrait::createFromTimestamp(int $timestamp, $timezone = null, ?string $locale = null) must be compatible with DateTimeImmutable::createFromTimestamp(int|float $timestamp): static in /home/dtip1888/fillah-elang/vendor/codeigniter4/framework/system/I18n/TimeTrait.php on line 268
+[05-Jan-2025 06:10:50 UTC] PHP Fatal error:  Uncaught CodeIgniter\Exceptions\ConfigException: Config\App::$baseURL "www.dtidinus.my.id/fillah-elang/" is not a valid URL. in /home/dtip1888/fillah-elang/vendor/codeigniter4/framework/system/HTTP/SiteURI.php:201
+Stack trace:
+#0 /home/dtip1888/fillah-elang/vendor/codeigniter4/framework/system/HTTP/SiteURI.php(147): CodeIgniter\HTTP\SiteURI->normalizeBaseURL()
+#1 /home/dtip1888/fillah-elang/vendor/codeigniter4/framework/system/HTTP/SiteURI.php(102): CodeIgniter\HTTP\SiteURI->determineBaseURL()
+#2 /home/dtip1888/fillah-elang/vendor/codeigniter4/framework/system/HTTP/SiteURIFactory.php(212): CodeIgniter\HTTP\SiteURI->__construct()
+#3 /home/dtip1888/fillah-elang/vendor/codeigniter4/framework/system/HTTP/SiteURIFactory.php(42): CodeIgniter\HTTP\SiteURIFactory->createURIFromRoutePath()
+#4 /home/dtip1888/fillah-elang/vendor/codeigniter4/framework/system/Config/Services.php(816): CodeIgniter\HTTP\SiteURIFactory->createFromGlobals()
+#5 /home/dtip1888/fillah-elang/vendor/codeigniter4/framework/system/Config/BaseService.php(312): CodeIgniter\Config\Services::uri()
+#6 /home/dtip1888/fillah-elang/vendor/codeigniter4/framework/system/Config/BaseService.php(251): CodeIgniter\Config\BaseService::__callStatic()
+#7 /home/dtip1888/fillah-elang/vendor/codeigniter4/framework/system/Config/Services.php(809): CodeIgniter\Config\BaseService::getSharedInstance()
+#8 /home/dtip1888/fillah-elang/vendor/codeigniter4/framework/system/Config/BaseService.php(312): CodeIgniter\Config\Services::uri()
+#9 /home/dtip1888/fillah-elang/vendor/codeigniter4/framework/system/Config/BaseService.php(202): CodeIgniter\Config\BaseService::__callStatic()
+#10 /home/dtip1888/fillah-elang/vendor/codeigniter4/framework/system/Config/Services.php(570): CodeIgniter\Config\BaseService::get()
+#11 /home/dtip1888/fillah-elang/vendor/codeigniter4/framework/system/Config/BaseService.php(312): CodeIgniter\Config\Services::incomingrequest()
+#12 /home/dtip1888/fillah-elang/vendor/codeigniter4/framework/system/Config/Services.php(528): CodeIgniter\Config\BaseService::__callStatic()
+#13 /home/dtip1888/fillah-elang/vendor/codeigniter4/framework/system/Config/BaseService.php(312): CodeIgniter\Config\Services::request()
+#14 /home/dtip1888/fillah-elang/vendor/codeigniter4/framework/system/Config/BaseService.php(251): CodeIgniter\Config\BaseService::__callStatic()
+#15 /home/dtip1888/fillah-elang/vendor/codeigniter4/framework/system/Config/Services.php(524): CodeIgniter\Config\BaseService::getSharedInstance()
+#16 /home/dtip1888/fillah-elang/vendor/codeigniter4/framework/system/Config/BaseService.php(312): CodeIgniter\Config\Services::request()
+#17 /home/dtip1888/fillah-elang/vendor/codeigniter4/framework/system/Debug/Exceptions.php(129): CodeIgniter\Config\BaseService::__callStatic()
+#18 [internal function]: CodeIgniter\Debug\Exceptions->exceptionHandler()
+#19 {main}
+  thrown in /home/dtip1888/fillah-elang/vendor/codeigniter4/framework/system/HTTP/SiteURI.php on line 201

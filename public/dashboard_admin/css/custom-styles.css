@@ -1,0 +1,101 @@
+:root {
+  --coklat: #863427;
+  --white: #ffffff;
+  --dark: #333333;
+}
+
+.btn-primary{
+    background-color: var(--coklat) !important;
+    border:  0 !important;
+    transition: all 0.2s ease-in-out;
+}
+
+.btn-primary:hover{
+    background-color: var(--coklat) !important;
+    border:  0 !important;
+    opacity: 0.7;
+}
+
+div .img-pp-dashboard{
+    width: 50px !important;
+    height: 50px !important;
+    border-radius: 50% !important;
+    background-color: aqua;
+}
+
+tr td{
+    max-width: 150px !important; 
+    white-space: nowrap !important; 
+    overflow: hidden !important; 
+    text-overflow: ellipsis !important;
+}
+
+.active{
+    background-color: var(--coklat);
+    /* padding-left: 35px; */
+}
+.nav-link.active{
+    color: var(--white) !important;
+}
+.nav-link.active .sb-nav-link-icon{
+    color: var(--white) !important;
+}
+
+.sb-sidenav-menu-heading{
+    color: var(--coklat) !important;
+    font-weight: 900;
+    opacity: 0.7;
+}
+
+.sb-sidenav{
+    background-color: #ffffff !important;
+    box-shadow: 0px 0px 20px 1px rgba(51, 51, 51, 0.274);
+    border-right: 2px solid #863427 !important;
+}
+.sb-sidenav-menu{
+    
+}
+
+.nav-link, .sb-nav-link-icon{
+    color: var(--coklat) !important;
+}
+.sb-nav-link-icon{
+    color: var(--coklat) !important;
+}
+
+.nav-link{
+    background-color: var(--white);
+    transition: all 0.2s ease-in-out;
+}
+
+.nav-link:hover{
+    z-index: 10;
+    position: relative;
+    box-shadow: 0px 0px 20px 1px #3333333d !important;
+    padding-left: 35px;
+}
+
+.nav-link.active{
+    background-color: var(--coklat);
+    box-shadow: 0px 0px 20px 1px #33333340 !important;
+    transition: all 0.2s ease-in-out;
+    z-index: 10;
+    position: relative;
+}
+.nav-link.active:hover{
+    opacity: 0.8;
+}
+
+.bg-white{
+    background-color: var(--white) !important;
+    box-shadow: 0px 0px 30px 1px #33333351 !important;
+    border-bottom: 2px solid #863427 !important;
+}
+
+.sb-sidenav-footer{
+    background-color: var(--coklat) !important;
+    color: white !important;
+}
+.container{
+    
+}

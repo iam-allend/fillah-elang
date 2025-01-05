@@ -1,0 +1,27 @@
+:root {
+  --coklat: #863427;
+  --white: #ffffff;
+  --dark: #333333;
+}
+
+body {
+  background-color: var(--white) !important;
+}
+
+button.btn.btn-user {
+  background-color: var(--coklat) !important;
+  color: var(--white) !important;
+  font-weight: bold;
+  font-size: 1.1rem;
+  width: 100% !important;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo span img {
+  width: 35px;
+}

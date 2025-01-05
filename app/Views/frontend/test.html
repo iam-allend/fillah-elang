@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Popup Produk</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Tombol untuk membuka popup produk -->
+  <div class="container text-center mt-5">
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#productModal">
+      Lihat Produk
+    </button>
+  </div>
+
+  <!-- Modal Popup -->
+  <div class="modal fade" id="productModal" tabindex="-1" aria-labelledby="productModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="productModalLabel">Informasi Produk</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <!-- Konten Produk -->
+          <h4>Onde-Onde Ketawa</h4>
+          <p>Onde-onde ketawa dengan berbagai varian rasa seperti cokelat, strawberry, pandan, melon, durian, dan paket mix untuk mencoba semua rasa.</p>
+          <ul>
+            <li><strong>Rasa:</strong> Cokelat, Strawberry, Pandan, Melon, Durian, Campur</li>
+            <li><strong>Harga:</strong> Rp 10.000 per bungkus</li>
+            <li><strong>Tagline:</strong> Tiada Ketawa yang serenyah satu ini</li>
+          </ul>
+          <img src="https://via.placeholder.com/150" class="img-fluid" alt="Gambar Produk">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+          <button type="button" class="btn btn-primary">Beli Sekarang</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Popup Produk</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .card {
+      margin-bottom: 20px;
+    }
+    .card-text {
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body>
+  <!-- Tampilan Card dengan Read More -->
+  <div class="container mt-5">
+    <div class="row">
+      <!-- Card 1 -->
+      <div class="col-md-4">
+        <div class="card">
+          <img src="https://via.placeholder.com/150" class="card-img-top" alt="Produk 1">
+          <div class="card-body">
+            <h5 class="card-title">Onde-Onde Ketawa Cokelat</h5>
+            <p class="card-text">Onde-onde ketawa rasa cokelat yang lezat dan renyah. Dibuat dengan bahan berkualitas tinggi.</p>
+            <button type="button" class="btn btn-primary read-more" data-bs-toggle="modal" data-bs-target="#readMoreModal" 
+                    data-title="Onde-Onde Ketawa Cokelat"
+                    data-description="Onde-onde ketawa rasa cokelat yang lezat dan renyah. Dibuat dengan bahan berkualitas tinggi dan cokelat premium. Cocok untuk cemilan di berbagai kesempatan. Tersedia dalam kemasan praktis 250gr."
+                    data-price="10000"
+                    data-flavor="Cokelat">
+              Read More
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Card 2 -->
+      <div class="col-md-4">
+        <div class="card">
+          <img src="https://via.placeholder.com/150" class="card-img-top" alt="Produk 2">
+          <div class="card-body">
+            <h5 class="card-title">Onde-Onde Ketawa Strawberry</h5>
+            <p class="card-text">Onde-onde ketawa rasa strawberry yang manis dan segar. Dengan aroma strawberry alami.</p>
+            <button type="button" class="btn btn-primary read-more" data-bs-toggle="modal" data-bs-target="#readMoreModal"
+                    data-title="Onde-Onde Ketawa Strawberry"
+                    data-description="Onde-onde ketawa rasa strawberry yang manis dan segar. Dengan aroma strawberry alami dan tekstur yang renyah. Dibuat dengan ekstrak strawberry pilihan. Tersedia dalam kemasan praktis 250gr."
+                    data-price="10000"
+                    data-flavor="Strawberry">
+              Read More
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="col-md-4">
+        <div class="card">
+          <img src="https://via.placeholder.com/150" class="card-img-top" alt="Produk 3">
+          <div class="card-body">
+            <h5 class="card-title">Onde-Onde Ketawa Pandan</h5>
+            <p class="card-text">Onde-onde ketawa rasa pandan yang harum dan nikmat. Dengan warna hijau alami.</p>
+            <button type="button" class="btn btn-primary read-more" data-bs-toggle="modal" data-bs-target="#readMoreModal"
+                    data-title="Onde-Onde Ketawa Pandan"
+                    data-description="Onde-onde ketawa rasa pandan yang harum dan nikmat. Dengan warna hijau alami dari daun pandan asli. Tekstur renyah dan rasanya autentik. Tersedia dalam kemasan praktis 250gr."
+                    data-price="10000"
+                    data-flavor="Pandan">
+              Read More
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal untuk Read More -->
+  <div class="modal fade" id="readMoreModal" tabindex="-1" aria-labelledby="readMoreModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="readMoreModalLabel"></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <img src="https://via.placeholder.com/150" class="img-fluid mb-3" alt="Produk">
+          <p id="modalDescription"></p>
+          <ul>
+            <li><strong>Rasa:</strong> <span id="modalFlavor"></span></li>
+            <li><strong>Harga:</strong> Rp <span id="modalPrice"></span> per bungkus</li>
+            <li><strong>Tagline:</strong> Tiada Ketawa yang serenyah satu ini</li>
+          </ul>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+          <button type="button" class="btn btn-primary">Beli Sekarang</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Script untuk mengatur konten modal ketika tombol Read More diklik
+    document.addEventListener('DOMContentLoaded', function() {
+      const readMoreButtons = document.querySelectorAll('.read-more');
+      
+      readMoreButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          const modal = document.getElementById('readMoreModal');
+          const title = this.getAttribute('data-title');
+          const description = this.getAttribute('data-description');
+          const price = this.getAttribute('data-price');
+          const flavor = this.getAttribute('data-flavor');
+          
+          modal.querySelector('.modal-title').textContent = title;
+          modal.querySelector('#modalDescription').textContent = description;
+          modal.querySelector('#modalPrice').textContent = price;
+          modal.querySelector('#modalFlavor').textContent = flavor;
+        });
+      });
+    });
+  </script>
+</body>
+</html>
